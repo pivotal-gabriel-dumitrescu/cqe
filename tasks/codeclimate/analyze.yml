@@ -8,6 +8,7 @@ image_resource:
 
 inputs:
   - name: ci-repo
+  - name: code
   - name: codeclimate
   - name: codeclimate-duplication
   - name: codeclimate-fixme
@@ -15,7 +16,7 @@ inputs:
   - name: codeclimate-requiresafe
 
 run:
-  path:  /bin/bash
+  path:  /bin/sh
   args:
     - -c
-    - ci-repo/scripts/codeclimate/analyze.sh "$ENGINE"
+    - ci-repo/scripts/codeclimate/analyze.sh

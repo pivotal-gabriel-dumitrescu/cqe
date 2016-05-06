@@ -63,7 +63,6 @@ jobs:
       passed: [node-app]
       trigger: true
     - get: codeclimate
-      trigger: true
     - get: codeclimate-duplication
     - get: codeclimate-fixme
     - get: codeclimate-nodesecurity
