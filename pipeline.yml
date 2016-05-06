@@ -1,5 +1,9 @@
 ---
 resources:
+  - name: slack-alert
+    type: slack
+    url: https://hooks.slack.com/services/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
+
   - name: code
     type: git
     source:
@@ -12,11 +16,68 @@ resources:
       uri: https://github.com/pivotal-gabriel-dumitrescu/qce.git
       branch: master
 
+  - name: codeclimate-repo
+    type: git
+    source:
+      uri: https://github.com/codeclimate/codeclimate.git
+      branch: master
+
+  - name: codeclimate-duplication
+    type: docker-image
+    source:
+      repository: codeclimate/codeclimate-duplication
+
+  - name: codeclimate-fixme
+    type: docker-image
+    source:
+      repository: codeclimate/codeclimate-fixme
+
+  - name: codeclimate-nodesecurity
+    type: docker-image
+    source:
+      repository: codeclimate/codeclimate-nodesecurity
+
+  - name: codeclimate-requiresafe
+    type: docker-image
+    source:
+      repository: codeclimate/codeclimate-requiresafe
+
 jobs:
   - name: node-app
     plan:
+    - get: ci-repo
     - get: code
       trigger: true
-    - get: ci-repo
     - task: install
-      file: ci-repo/tasks/install.yml
+      file: ci-repo/tasks/app/install.yml
+
+  - name: engines
+    plan:
+    - get: ci-repo
+    - get: code
+      passed: [node-app]
+      trigger: true
+    - get: codeclimate-repo
+      trigger: true
+    - get: codeclimate-duplication
+    - get: codeclimate-fixme
+    - get: codeclimate-nodesecurity
+    - get: codeclimate-requiresafe
+    - task: install
+      file: ci-repo/tasks/codeclimate/install.yml
+    - task: analyze
+      file: ci-repo/tasks/codeclimate/analyze.yml
+    - put: slack-alert
+      params:
+        channel: '#private-project-alert'
+        text_file: 'code/report-fixme.txt'
+        
+  #
+  # - name: deploy-pws
+  #   plan:
+  #   - get: ci-repo
+  #   - get: code
+  #     passed: [engines]
+  #     triger: true
+  #   - task: deploy
+  #     file: ci-repo/tasks/app/deploy.yml
