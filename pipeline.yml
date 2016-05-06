@@ -19,4 +19,4 @@ jobs:
       trigger: true
     - get: ci-repo
     - task: install
-      file: code/tasks/install.yml
+      file: ci-repo/tasks/install.yml
