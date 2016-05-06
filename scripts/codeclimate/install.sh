@@ -1,5 +1,6 @@
 #!/bin/sh
 
-curl -L https://github.com/codeclimate/codeclimate/archive/master.tar.gz | tar xvz
-cd codeclimate-* && sudo ./configure && sudo make install
-codeclimate version
+docker run \
+  -v /var/run/docker.sock:/var/run/docker.sock
+  -v $(which docker):$(which docker)
+  -ti codeclimate/codeclimate help
