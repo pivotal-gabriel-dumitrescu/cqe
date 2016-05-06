@@ -1,4 +1,5 @@
 #!/bin/sh
 
-cd codeclimate-repo
+cd codeclimate-*
 sudo make install
+codeclimate version
