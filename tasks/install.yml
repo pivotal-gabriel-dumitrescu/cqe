@@ -11,4 +11,4 @@ inputs:
   - name: ci-repo
 
 run:
-  path: ./ci-repo/scripts/install.sh
+  path: ci-repo/scripts/install.sh
