@@ -22,7 +22,7 @@ resources:
       uri: https://github.com/codeclimate/codeclimate.git
       branch: master
 
-  - name: codeclimate
+  - name: codeclimate-cli
     type: docker-image
     source:
       repository: codeclimate/codeclimate
@@ -31,6 +31,11 @@ resources:
     type: docker-image
     source:
       repository: codeclimate/codeclimate-duplication
+
+  - name: codeclimate-eslint
+    type: docker-image
+    source:
+      repository: codeclimate/codeclimate-eslint
 
   - name: codeclimate-fixme
     type: docker-image
@@ -62,11 +67,14 @@ jobs:
     - get: code
       passed: [node-app]
       trigger: true
-    - get: codeclimate
+    - get: codeclimate-repo
     - get: codeclimate-duplication
+    - get: codeclimate-eslint
     - get: codeclimate-fixme
     - get: codeclimate-nodesecurity
     - get: codeclimate-requiresafe
+    - task: install
+      file: ci-repo/tasks/codeclimate/install.yml
     - task: analyze
       file: ci-repo/tasks/codeclimate/analyze.yml
     - put: slack-alert
