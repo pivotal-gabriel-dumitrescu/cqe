@@ -2,7 +2,8 @@
 
 cd code
 
-docker run \
+sudo docker -d
+sudo docker run \
   --tty --rm \
   --volume .:/code \
   --volume /tmp/cc:/tmp/cc \
