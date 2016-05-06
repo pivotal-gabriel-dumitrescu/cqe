@@ -2,6 +2,12 @@
 
 cd codeclimate-cli
 
+docker -d
+sudo docker -d
+sudo docker version
+service docker restart
+sudo service docker start
+
 docker images
 docker ps
 
