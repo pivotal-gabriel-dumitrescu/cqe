@@ -7,10 +7,11 @@ It allows you to run Code Climate engines on your local machine or CI using Dock
 
 The engines used for code quality testing are based on the type of project:
 
-Example:
-project:
+An example project would be:
  - Ruby on Rails with Ember App with CoffeeScript as Front End App
-engines:
+
+The engines available for the project example above would be:
+
 - brakeman: Static analysis tool which checks Ruby on Rails applications for security vulnerabilities.
 - bundler-audit: Patch-level verification for Bundler.
 - coffeelint: A style checker for CoffeeScript.
@@ -19,5 +20,6 @@ engines:
 - rubocop: A Ruby static code analyzer, based on the community Ruby style guide.
 - scss-lint: Configurable tool for writing clean and consistent SCSS.
 - watson: A young Ember Doctor to help you fix your code.
+
 
 The project relates to Quality Testing Tools section of Circle of Code.
