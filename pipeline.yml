@@ -67,8 +67,6 @@ jobs:
     - get: codeclimate-fixme
     - get: codeclimate-nodesecurity
     - get: codeclimate-requiresafe
-    # - task: install
-      # file: ci-repo/tasks/codeclimate/install.yml
     - task: analyze
       file: ci-repo/tasks/codeclimate/analyze.yml
     - put: slack-alert

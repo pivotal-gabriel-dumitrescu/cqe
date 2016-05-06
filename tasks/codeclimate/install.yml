@@ -16,7 +16,4 @@ inputs:
   - name: codeclimate-requiresafe
 
 run:
-  path:  /bin/sh
-  args:
-    - -c
-    - ci-repo/scripts/codeclimate/install.sh
+  path: ./ci-repo/scripts/codeclimate/install.sh
