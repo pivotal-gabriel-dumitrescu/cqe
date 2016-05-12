@@ -4,12 +4,11 @@ platform: linux
 image_resource:
   type: docker-image
   source:
-    repository: codeclimate/codeclimate
+    repository: gdumitrescu/codeclimate
 
 inputs:
   - name: ci-repo
   - name: code
-  - name: codeclimate-cli
   - name: codeclimate-duplication
   - name: codeclimate-eslint
   - name: codeclimate-fixme

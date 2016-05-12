@@ -14,7 +14,7 @@ resources:
     type: git
     source:
       uri: https://github.com/pivotal-gabriel-dumitrescu/qce.git
-      branch: master
+      branch: develop
 
   - name: codeclimate-repo
     type: git
@@ -56,6 +56,7 @@ jobs:
   - name: node-app
     plan:
     - get: ci-repo
+      trigger: true
     - get: code
       trigger: true
     - task: install
@@ -67,14 +68,11 @@ jobs:
     - get: code
       passed: [node-app]
       trigger: true
-    - get: codeclimate-cli
     - get: codeclimate-duplication
     - get: codeclimate-eslint
     - get: codeclimate-fixme
     - get: codeclimate-nodesecurity
     - get: codeclimate-requiresafe
-    - task: install
-      file: ci-repo/tasks/codeclimate/install.yml
     - task: analyze
       file: ci-repo/tasks/codeclimate/analyze.yml
     - put: slack-alert

@@ -1,6 +1,9 @@
 #!/bin/sh
 
 cd code
+docker run -v /var/run/docker.sock:/var/run/docker.sock \
+  -v $(which docker):$(which docker) \
+  -ti codeclimate/codeclimate version
 
 codeclimate analyze -f text -e duplication > report-duplication.txt
 codeclimate analyze -f text -e eslint > report-eslint.txt
