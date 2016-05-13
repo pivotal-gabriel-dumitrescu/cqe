@@ -53,7 +53,7 @@ resources:
       repository: codeclimate/codeclimate-requiresafe
 
 jobs:
-  - name: node-app
+  - name: app
     plan:
     - get: ci-repo
       trigger: true
@@ -66,7 +66,7 @@ jobs:
     plan:
     - get: ci-repo
     - get: code
-      passed: [node-app]
+      passed: [app]
       trigger: true
     - get: codeclimate-duplication
     - get: codeclimate-eslint
