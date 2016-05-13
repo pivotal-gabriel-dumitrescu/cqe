@@ -8,8 +8,10 @@ image_resource:
     tag: 4.4.3
 
 inputs:
-  - name: code
   - name: ci-repo
-
+  - name: code
 run:
-  path: ./ci-repo/scripts/app/install.sh
+  path:  /bin/sh
+  args:
+    - -c
+    - ci-repo/scripts/app/install.sh
